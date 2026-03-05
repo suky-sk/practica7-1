@@ -7,6 +7,9 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     steps:
 
@@ -39,4 +42,4 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/practica_7.1:latest
-            ghcr.io/${{ github.repository_owner }}/practica_7.1:latest
+            ghcr.io/${{ github.actor }}/practica_7.1:latest
