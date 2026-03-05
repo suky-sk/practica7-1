@@ -1,22 +1,27 @@
-name: Granja Animales Node.js CI
+name: Tests CI
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v1
+      - name: Descargar el repositorio
+        uses: actions/checkout@v3
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
-      - name: Run Yarn
-        run: yarn
-      - name: Run tests
+          node-version: "22"
+
+      - name: Instalar dependencias
+        run: yarn install
+
+      - name: Ejecutar tests
         run: yarn test
+        
+      - name: Build Docker image
+        run: docker build -t animal-farm .  
