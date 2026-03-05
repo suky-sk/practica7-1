@@ -22,3 +22,6 @@ jobs:
 
       - name: Ejecutar tests
         run: yarn test
+        
+      - name: Build Docker image
+        run: docker build -t animal-farm .  
